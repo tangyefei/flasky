@@ -45,6 +45,11 @@ def comments():
 
     return render_template('comments.html', comments=comments)
 
+@app.route('/extends')
+def extends():
+    return render_template('child.html')
+
+
 
 
 
