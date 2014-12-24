@@ -1,7 +1,10 @@
 from flask import Flask, render_template
 from flask.ext.bootstrap import Bootstrap
+from flask.ext.moment import Moment
+from datetime import datetime
 
 app = Flask(__name__)
+moment = Moment(app)
 bootstrap = Bootstrap(app)
 
 class Human():
@@ -10,7 +13,7 @@ class Human():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', current_time=datetime.utcnow())
 
 @app.route('/<name>')
 def user(name):
@@ -55,7 +58,6 @@ def extends():
 def bootstrap(name):
     return render_template('bootstrap.html', name=name)
 
-
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
@@ -65,4 +67,4 @@ def internal_server_error(e):
     return render_template('500.html'), 500
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
