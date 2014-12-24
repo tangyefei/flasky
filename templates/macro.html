@@ -1,9 +1,3 @@
 {% macro render_comment(comment) %}
     <li>{{comment}}</li>
 {% endmacro %}
-
-<ul>
-     {% for comment in comments%}
-        {{ render_comment(comment) }}
-    {% endfor %}
-</ul>

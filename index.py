@@ -39,6 +39,14 @@ def macro():
     return render_template('macro.html', comments=comments)
 
 
+@app.route('/comments')
+def comments():
+    comments = ["To Be", "Or", "Not To Be"]
+
+    return render_template('comments.html', comments=comments)
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
