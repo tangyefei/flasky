@@ -25,5 +25,20 @@ def flow():
 
     return render_template('flow.html', user=user)
 
+@app.route('/loop')
+def loop():
+    comments = ["To Be", "Or", "Not To Be"]
+
+    return render_template('loop.html', comments=comments)
+
+
+@app.route('/macro')
+def macro():
+    comments = ["To Be", "Or", "Not To Be"]
+
+    return render_template('macro.html', comments=comments)
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
