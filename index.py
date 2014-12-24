@@ -19,5 +19,11 @@ def user(name):
 
     return render_template('user.html', name=name, mydict=mydict, mylist=mylist, myintvar=myintvar, myobj=myobj)
 
+@app.route('/flow')
+def flow():
+    user = 'tangyefei'
+
+    return render_template('flow.html', user=user)
+
 if __name__ == '__main__':
     app.run(debug=True)
