@@ -2,8 +2,17 @@ from flask import Flask, render_template
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.moment import Moment
 from datetime import datetime
+from flask.ext.wtf import Form
+from wtforms import StringField, SubmitField
+from wtforms.validators import Required
+
+class NameForm(Form):
+    name = StringField('What is your name?', validators=[Required()])
+    submit = SubmitField('Submit')
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'hard to guess string'
+
 moment = Moment(app)
 bootstrap = Bootstrap(app)
 
@@ -13,7 +22,8 @@ class Human():
 
 @app.route('/')
 def index():
-    return render_template('index.html', current_time=datetime.utcnow())
+    form = NameForm()
+    return render_template('index.html', form=form)
 
 @app.route('/<name>')
 def user(name):
