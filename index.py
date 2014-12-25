@@ -20,10 +20,14 @@ class Human():
     def somemethod(self):
         return 'what the fucking world!'
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
+    name = None
     form = NameForm()
-    return render_template('index.html', form=form)
+    if form.validate_on_submit():
+        name = form.name.data
+        form.name.data = ''
+    return render_template('index.html', form=form, name=name)
 
 @app.route('/<name>')
 def user(name):
