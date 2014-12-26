@@ -9,6 +9,8 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import Required
 from flask.ext.sqlalchemy import SQLAlchemy
 
+from flask.ext.script import Shell
+
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -113,6 +115,11 @@ def page_not_found(e):
 @app.errorhandler(500)
 def internal_server_error(e):
     return render_template('500.html'), 500
+
+def make_shell_context():
+    return dict(app=app, db=db, User=User, Role=Role)
+
+manager.add_command("shell", Shell(make_context=make_shell_context))
 
 if __name__ == '__main__':
     manager.run()
